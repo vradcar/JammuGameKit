@@ -54,7 +54,7 @@ public class CharacterController2D : MonoBehaviour
 			if (colliders[i].gameObject != gameObject)
 			{
 				m_Grounded = true;
-				if (wasGrounded)
+				if (!wasGrounded)
 					OnLandEvent.Invoke();
 			}
 		}
@@ -64,7 +64,7 @@ public class CharacterController2D : MonoBehaviour
 	public void Move(float move, bool crouch, bool jump)
 	{
 		// If crouching, check to see if the character can stand up
-		if (crouch)
+		if (!crouch)
 		{
 			// If the character has a ceiling preventing them from standing up, keep them crouching
 			if (Physics2D.OverlapCircle(m_CeilingCheck.position, k_CeilingRadius, m_WhatIsGround))
@@ -80,7 +80,7 @@ public class CharacterController2D : MonoBehaviour
 			// If crouching
 			if (crouch)
 			{
-				if (m_wasCrouching)
+				if (!m_wasCrouching)
 				{
 					m_wasCrouching = true;
 					OnCrouchEvent.Invoke(true);
